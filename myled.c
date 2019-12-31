@@ -44,9 +44,9 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	if(copy_from_user(&c,buf,sizeof(char)))
 		return -EFAULT;
 	if(c == '0')
-		gpio_base[10] = 1 << 25;//LED消灯
+		gpio_base[10] = 1 << 26;//LED消灯
 	else if(c == '1')
-		gpio_base[7] = 1 << 25;//LED点灯
+		gpio_base[7] = 1 << 26;//LED点灯
 	return 1;
 }
 
@@ -82,7 +82,7 @@ static int __init init_mod(void)
 	
 	gpio_base = ioremap_nocache(0x3f200000, 0xA0);
 
-	const u32 led = 25;
+	const u32 led = 26;
 	const u32 index = led/10;
 	const u32 shift = (led%10)*3;
 	const u32 mask = ~(0x7 << shift);
